@@ -61,7 +61,7 @@ public class GeocodeAddress {
             data.getAsJsonArray("locations").forEach(jsonElement -> {
                 JsonObject item = jsonElement.getAsJsonObject();
                 System.out.printf("%n");
-                // The fully formatted address
+                // The complete address using comma-separated values
                 System.out.printf("    address: %s%n", item.get("address"));
                 // The components which make up the address such as road, city, state, etc
                 System.out.printf("    address-components: %s%n", item.get("address-components"));
@@ -94,8 +94,12 @@ public class GeocodeAddress {
                 System.out.printf("    location-type: %s%n", item.get("location-type"));
                 // The location longitude
                 System.out.printf("    longitude: %s%n", item.get("longitude"));
+                // The formatted address using local standards suitable for printing on an envelope
+                System.out.printf("    postal-address: %s%n", item.get("postal-address"));
                 // The postal code for the location
                 System.out.printf("    postal-code: %s%n", item.get("postal-code"));
+                // The ISO 3166-2 region code for the location
+                System.out.printf("    region-code: %s%n", item.get("region-code"));
                 // The state of the location
                 System.out.printf("    state: %s%n", item.get("state"));
                 // Map containing timezone details for the location

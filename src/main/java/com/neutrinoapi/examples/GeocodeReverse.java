@@ -36,7 +36,7 @@ public class GeocodeReverse {
             JsonObject data = response.getData().get();
             System.out.println("API Response OK: ");
             
-            // The fully formatted address
+            // The complete address using comma-separated values
             System.out.printf("address: %s%n", data.get("address"));
             
             // The components which make up the address such as road, city, state, etc
@@ -83,8 +83,14 @@ public class GeocodeReverse {
             // The location longitude
             System.out.printf("longitude: %s%n", data.get("longitude"));
             
+            // The formatted address using local standards suitable for printing on an envelope
+            System.out.printf("postal-address: %s%n", data.get("postal-address"));
+            
             // The postal code for the location
             System.out.printf("postal-code: %s%n", data.get("postal-code"));
+            
+            // The ISO 3166-2 region code for the location
+            System.out.printf("region-code: %s%n", data.get("region-code"));
             
             // The state of the location
             System.out.printf("state: %s%n", data.get("state"));

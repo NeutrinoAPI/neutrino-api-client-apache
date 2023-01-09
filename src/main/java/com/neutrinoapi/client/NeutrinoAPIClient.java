@@ -325,10 +325,12 @@ public class NeutrinoAPIClient {
      * Resize an image and output as either JPEG or PNG
      * <p>The parameters this API accepts are:</p>
      * <ul>
-     * <li>"width" - The width to resize to (in px) while preserving aspect ratio</li>
+     * <li>"resize-mode" - The resize mode to use</li>
+     * <li>"width" - The width to resize to (in px)</li>
      * <li>"format" - The output image format</li>
-     * <li>"image-url" - The URL or Base64 encoded Data URL for the source image (you can also upload an image file directly in which case this field is ignored)</li>
-     * <li>"height" - The height to resize to (in px) while preserving aspect ratio</li>
+     * <li>"image-url" - The URL or Base64 encoded Data URL for the source image</li>
+     * <li>"bg-color" - The image background color in hexadecimal notation (e.g. #0000ff)</li>
+     * <li>"height" - The height to resize to (in px)</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -344,13 +346,15 @@ public class NeutrinoAPIClient {
      * Watermark one image with another image
      * <p>The parameters this API accepts are:</p>
      * <ul>
+     * <li>"resize-mode" - The resize mode to use</li>
      * <li>"format" - The output image format</li>
-     * <li>"width" - If set resize the resulting image to this width (in px) while preserving aspect ratio</li>
-     * <li>"image-url" - The URL or Base64 encoded Data URL for the source image (you can also upload an image file directly in which case this field is ignored)</li>
+     * <li>"width" - If set resize the resulting image to this width (in px)</li>
+     * <li>"image-url" - The URL or Base64 encoded Data URL for the source image</li>
      * <li>"position" - The position of the watermark image</li>
-     * <li>"watermark-url" - The URL or Base64 encoded Data URL for the watermark image (you can also upload an image file directly in which case this field is ignored)</li>
+     * <li>"watermark-url" - The URL or Base64 encoded Data URL for the watermark image</li>
      * <li>"opacity" - The opacity of the watermark (0 to 100)</li>
-     * <li>"height" - If set resize the resulting image to this height (in px) while preserving aspect ratio</li>
+     * <li>"bg-color" - The image background color in hexadecimal notation (e.g. #0000ff)</li>
+     * <li>"height" - If set resize the resulting image to this height (in px)</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -383,7 +387,7 @@ public class NeutrinoAPIClient {
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"format" - The data format</li>
-     * <li>"include-vpn" - Include public VPN provider IP addresses</li>
+     * <li>"include-vpn" - Include public VPN provider addresses</li>
      * <li>"cidr" - Output IPs using CIDR notation</li>
      * <li>"ip6" - Output the IPv6 version of the blocklist</li>
      * </ul>
@@ -414,7 +418,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * Analyze and extract provider information for an IP address
+     * Execute a realtime network probe against an IPv4 or IPv6 address
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"ip" - IPv4 or IPv6 address</li>
@@ -503,25 +507,6 @@ public class NeutrinoAPIClient {
      */
     public APIResponse qrCode(Map<String, String> params, Path outputFilePath) {
         return execRequest("POST", "qr-code", params, outputFilePath, 20L);
-    }
-
-    /**
-     * Send a free-form message to any mobile device via SMS
-     * <p>The parameters this API accepts are:</p>
-     * <ul>
-     * <li>"number" - The phone number to send a message to</li>
-     * <li>"country-code" - ISO 2-letter country code</li>
-     * <li>"limit" - Limit the total number of SMS allowed to the supplied phone number</li>
-     * <li>"message" - The SMS message to send</li>
-     * <li>"limit-ttl" - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)</li>
-     * </ul>
-     *
-     * @param params The API request parameters
-     * @return APIResponse
-     * @see <a href="https://www.neutrinoapi.com/api/sms-message">Documentation</a>
-     */
-    public APIResponse smsMessage(Map<String, String> params) {
-        return execRequest("POST", "sms-message", params, null, 30L);
     }
 
     /**

@@ -4,14 +4,14 @@ Java client using the Apache HTTP client and Gson JSON library
 
 The official API client and SDK built by [NeutrinoAPI](https://www.neutrinoapi.com/)
 
-| Feature          |       |
-|------------------|-------|
-| Platform Version | >= 11 |
-| HTTP Library     |       |
-| JSON Library     | Gson  |
-| HTTP/2           | false |
-| HTTP/3           | false |
-| CodeGen Version  | 4.6.8 |
+| Feature          |        |
+|------------------|--------|
+| Platform Version | >= 11  |
+| HTTP Library     | Apache |
+| JSON Library     | Gson   |
+| HTTP/2           | No     |
+| HTTP/3           | No     |
+| CodeGen Version  | 4.6.10 |
 
 ## Getting started
 
