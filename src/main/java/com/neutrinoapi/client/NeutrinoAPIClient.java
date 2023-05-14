@@ -161,6 +161,22 @@ public class NeutrinoAPIClient {
     }
 
     /**
+     * Retrieve domain name details and detect potentially malicious or dangerous domains
+     * <p>The parameters this API accepts are:</p>
+     * <ul>
+     * <li>"host" - A domain name</li>
+     * <li>"live" - For domains that we have never seen before then perform various live checks and realtime reconnaissance</li>
+     * </ul>
+     *
+     * @param params The API request parameters
+     * @return APIResponse
+     * @see <a href="https://www.neutrinoapi.com/api/domain-lookup">Documentation</a>
+     */
+    public APIResponse domainLookup(Map<String, String> params) {
+        return execRequest("GET", "domain-lookup", params, null, 120L);
+    }
+
+    /**
      * Parse, validate and clean an email address
      * <p>The parameters this API accepts are:</p>
      * <ul>

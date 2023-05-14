@@ -73,7 +73,7 @@ public class IPInfo {
             // ISO 3166-2 region code (if detectable)
             System.out.printf("region-code: %s%n", data.get("region-code"));
             
-            // Map containing timezone details for the location
+            // Map containing timezone details
             System.out.printf("timezone: %s%n", data.get("timezone"));
             
             // True if this is a valid IPv4 or IPv6 address

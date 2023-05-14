@@ -6,7 +6,7 @@
     <groupId>com.neutrinoapi</groupId>
     <artifactId>neutrino-api-client-apache</artifactId>
     <name>neutrino-api-client-apache</name>
-    <version>4.6.10</version>
+    <version>4.6.11</version>
     <packaging>jar</packaging>
 
     <url>https://www.neutrinoapi.com/</url>

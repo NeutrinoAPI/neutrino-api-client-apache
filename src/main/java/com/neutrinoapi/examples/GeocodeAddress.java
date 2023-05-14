@@ -102,7 +102,7 @@ public class GeocodeAddress {
                 System.out.printf("    region-code: %s%n", item.get("region-code"));
                 // The state of the location
                 System.out.printf("    state: %s%n", item.get("state"));
-                // Map containing timezone details for the location
+                // Map containing timezone details
                 System.out.printf("    timezone: %s%n", item.get("timezone"));
             });
             
