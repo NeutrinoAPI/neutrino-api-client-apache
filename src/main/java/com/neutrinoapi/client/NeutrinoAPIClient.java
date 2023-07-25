@@ -325,6 +325,7 @@ public class NeutrinoAPIClient {
      * <li>"header" - The header HTML to insert into each page</li>
      * <li>"margin-top" - The document top margin (in mm)</li>
      * <li>"margin-bottom" - The document bottom margin (in mm)</li>
+     * <li>"bg-color" - For image rendering set the background color in hexadecimal notation (e.g. #0000ff)</li>
      * <li>"landscape" - Set the document to landscape orientation</li>
      * </ul>
      *
@@ -535,6 +536,7 @@ public class NeutrinoAPIClient {
      * <li>"language-code" - The language to send the verification code in</li>
      * <li>"code-length" - The number of digits to use in the security code (must be between 4 and 12)</li>
      * <li>"limit" - Limit the total number of SMS allowed to the supplied phone number</li>
+     * <li>"brand-name" - Set a custom brand or product name in the verification message</li>
      * <li>"limit-ttl" - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)</li>
      * </ul>
      *

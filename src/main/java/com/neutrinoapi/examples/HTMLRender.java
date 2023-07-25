@@ -90,6 +90,10 @@ public class HTMLRender {
         // The document bottom margin (in mm)
         params.put("margin-bottom", "0");
 
+        // For image rendering set the background color in hexadecimal notation (e.g. #0000ff). For PNG
+        // output the special value of 'transparent' can be used to create a transparent PNG
+        params.put("bg-color", "");
+
         // Set the document to landscape orientation
         params.put("landscape", "false");
 

@@ -41,6 +41,9 @@ public class SMSVerify {
         // within the TTL then error code 14 will be returned
         params.put("limit", "10");
 
+        // Set a custom brand or product name in the verification message
+        params.put("brand-name", "");
+
         // Set the TTL in number of days that the 'limit' option will remember a phone number (the default
         // is 1 day and the maximum is 365 days)
         params.put("limit-ttl", "1");
