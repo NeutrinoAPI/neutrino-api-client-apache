@@ -27,6 +27,12 @@ public class Convert {
             JsonObject data = response.getData().get();
             System.out.println("API Response OK: ");
             
+            // The full name of the type being converted from
+            System.out.printf("from-name: %s%n", data.get("from-name"));
+            
+            // The standard UTF-8 symbol used to represent the type being converted from
+            System.out.printf("from-symbol: %s%n", data.get("from-symbol"));
+            
             // The type of the value being converted from
             System.out.printf("from-type: %s%n", data.get("from-type"));
             
@@ -38,6 +44,12 @@ public class Convert {
             
             // The result of the conversion as a floating-point number
             System.out.printf("result-float: %s%n", data.get("result-float"));
+            
+            // The full name of the type being converted to
+            System.out.printf("to-name: %s%n", data.get("to-name"));
+            
+            // The standard UTF-8 symbol used to represent the type being converted to
+            System.out.printf("to-symbol: %s%n", data.get("to-symbol"));
             
             // The type being converted to
             System.out.printf("to-type: %s%n", data.get("to-type"));

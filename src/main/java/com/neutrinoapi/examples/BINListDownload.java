@@ -31,6 +31,13 @@ public class BINListDownload {
         // higher BINs (including some 9, 10 and 11 digit BINs where available)
         params.put("include-8digit", "false");
 
+        // Include all BINs and all available fields in the CSV file (overrides any values set for
+        // 'include-iso3' or 'include-8digit')
+        params.put("include-all", "false");
+
+        // Set this option to 'gzip' to have the output file compressed using gzip
+        params.put("output-encoding", "");
+
         APIResponse response = neutrinoAPI.binListDownload(params, tmpFile);
         if (response.getFile().isPresent()) {
             Path outputFile = response.getFile().get();

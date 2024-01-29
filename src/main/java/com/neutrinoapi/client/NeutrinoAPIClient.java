@@ -95,6 +95,8 @@ public class NeutrinoAPIClient {
      * <ul>
      * <li>"include-iso3" - Include ISO 3-letter country codes and ISO 3-letter currency codes in the data</li>
      * <li>"include-8digit" - Include 8-digit and higher BIN codes</li>
+     * <li>"include-all" - Include all BINs and all available fields in the CSV file (overrides any values set for 'include-iso3' or 'include-8digit')</li>
+     * <li>"output-encoding" - Set this option to 'gzip' to have the output file compressed using gzip</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -404,9 +406,11 @@ public class NeutrinoAPIClient {
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"format" - The data format</li>
-     * <li>"include-vpn" - Include public VPN provider addresses</li>
      * <li>"cidr" - Output IPs using CIDR notation</li>
      * <li>"ip6" - Output the IPv6 version of the blocklist</li>
+     * <li>"category" - The category of IP addresses to include in the download file</li>
+     * <li>"output-encoding" - Set this option to 'gzip' to have the output file compressed using gzip</li>
+     * <li>"checksum" - Do not download the file but just return the current files MurmurHash3 checksum</li>
      * </ul>
      *
      * @param params The API request parameters
