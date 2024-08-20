@@ -95,7 +95,7 @@ public class GeocodeReverse {
             // The state of the location
             System.out.printf("state: %s%n", data.get("state"));
             
-            // Map containing timezone details
+            // Structure of a valid ip-info -> timezone response
             System.out.printf("timezone: %s%n", data.get("timezone"));
             
         } else {

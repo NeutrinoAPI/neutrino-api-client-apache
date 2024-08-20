@@ -13,7 +13,7 @@ public class IPProbe {
         NeutrinoAPIClient neutrinoAPI = new NeutrinoAPIClient("<your-user-id>", "<your-api-key>");
         Map<String, String> params = new HashMap<>();
 
-        // IPv4 or IPv6 address
+        // An IPv4 or IPv6 address. Accepts standard IP notation and also CIDR notation
         params.put("ip", "194.233.98.38");
 
         APIResponse response = neutrinoAPI.ipProbe(params);
@@ -66,7 +66,7 @@ public class IPProbe {
             // The IPs full hostname (PTR)
             System.out.printf("hostname: %s%n", data.get("hostname"));
             
-            // The IP address
+            // The IPv4 or IPv6 address returned
             System.out.printf("ip: %s%n", data.get("ip"));
             
             // True if this is a bogon IP address such as a private network, local network or reserved address
@@ -80,7 +80,7 @@ public class IPProbe {
             // the provider type is VPN/proxy, this occurs in the case that the IP is detected as both types
             System.out.printf("is-isp: %s%n", data.get("is-isp"));
             
-            // True if this IP ia a proxy
+            // True if this IP is a proxy
             System.out.printf("is-proxy: %s%n", data.get("is-proxy"));
             
             // True if this is a IPv4 mapped IPv6 address

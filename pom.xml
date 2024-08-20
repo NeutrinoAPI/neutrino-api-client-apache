@@ -6,11 +6,11 @@
     <groupId>com.neutrinoapi</groupId>
     <artifactId>neutrino-api-client-apache</artifactId>
     <name>neutrino-api-client-apache</name>
-    <version>4.6.13</version>
+    <version>4.6.15</version>
     <packaging>jar</packaging>
 
     <url>https://www.neutrinoapi.com/</url>
-    <description>Java client using the Apache HTTP client and Gson JSON library</description>
+    <description>Neutrino API Java client using the Apache HTTP and Gson JSON libraries</description>
     <licenses>
         <license>
             <name>MIT License</name>

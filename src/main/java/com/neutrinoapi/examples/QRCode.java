@@ -23,6 +23,9 @@ public class QRCode {
         NeutrinoAPIClient neutrinoAPI = new NeutrinoAPIClient("<your-user-id>", "<your-api-key>");
         Map<String, String> params = new HashMap<>();
 
+        // The barcode format to output. Accepted formats are: qr, c128
+        params.put("code-format", "qr");
+
         // The width of the QR code (in px)
         params.put("width", "256");
 

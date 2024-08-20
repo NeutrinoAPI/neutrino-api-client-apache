@@ -51,9 +51,22 @@ public class BrowserBot {
             // The complete raw, decompressed and decoded page content. Usually will be either HTML, JSON or XML
             System.out.printf("content: %s%n", data.get("content"));
             
-            // Array containing all the elements matching the supplied selector. Each element object will
-            // contain the text content, HTML content and all current element attributes
-            System.out.printf("elements: %s%n", data.get("elements"));
+            // Array containing all the elements matching the supplied selector
+            System.out.printf("elements:%n");
+            data.getAsJsonArray("elements").forEach(jsonElement -> {
+                JsonObject item = jsonElement.getAsJsonObject();
+                System.out.printf("%n");
+                // The 'class' attribute of the element
+                System.out.printf("    class: %s%n", item.get("class"));
+                // The 'href' attribute of the element
+                System.out.printf("    href: %s%n", item.get("href"));
+                // The raw HTML of the element
+                System.out.printf("    html: %s%n", item.get("html"));
+                // The 'id' attribute of the element
+                System.out.printf("    id: %s%n", item.get("id"));
+                // The plain-text content of the element with normalized whitespace
+                System.out.printf("    text: %s%n", item.get("text"));
+            });
             
             // Contains the error message if an error has occurred ('is-error' will be true)
             System.out.printf("error-message: %s%n", data.get("error-message"));

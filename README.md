@@ -1,6 +1,6 @@
 # NeutrinoAPI Java Apache SDK
 
-Java client using the Apache HTTP client and Gson JSON library
+Neutrino API Java client using the Apache HTTP and Gson JSON libraries
 
 The official API client and SDK built by [NeutrinoAPI](https://www.neutrinoapi.com/)
 
@@ -11,7 +11,7 @@ The official API client and SDK built by [NeutrinoAPI](https://www.neutrinoapi.c
 | JSON Library     | Gson   |
 | HTTP/2           | No     |
 | HTTP/3           | No     |
-| CodeGen Version  | 4.6.13 |
+| CodeGen Version  | 4.6.15 |
 
 ## Getting started
 
@@ -36,6 +36,8 @@ $ mvn compile exec:java \
 ```
 
 You can find examples of all APIs in _src/main/java/com/neutrinoapi/examples_
+
+Set the __'your-user-id'__ and __'your-api-key'__ values in the example to retrieve real API responses
 
 ## For Support 
 [Contact us](https://www.neutrinoapi.com/contact-us/)

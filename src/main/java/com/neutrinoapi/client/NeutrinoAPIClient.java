@@ -36,10 +36,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class NeutrinoAPIClient {
 
-    public static final String MULTICLOUD_ENDPOINT = "https://neutrinoapi.net/";
-    public static final String AWS_ENDPOINT = "https://aws.neutrinoapi.net/";
-    public static final String GCP_ENDPOINT = "https://gcp.neutrinoapi.net/";
-    public static final String MS_AZURE_ENDPOINT = "https://msa.neutrinoapi.net/";
+    public static final String Multicloud = "https://neutrinoapi.net/";
+    public static final String AWS = "https://aws.neutrinoapi.net/";
+    public static final String GCP = "https://gcp.neutrinoapi.net/";
+    public static final String Backup = "https://neutrinoapi.com/";
 
     private static final long CONNECT_TIMEOUT_MS = TimeUnit.SECONDS.toMillis(10);
 
@@ -56,7 +56,7 @@ public class NeutrinoAPIClient {
     public NeutrinoAPIClient(String userID, String APIKey) {
         this.userID = userID;
         this.apiKey = APIKey;
-        this.baseURL = MULTICLOUD_ENDPOINT;
+        this.baseURL = Multicloud;
     }
 
     /**
@@ -306,29 +306,31 @@ public class NeutrinoAPIClient {
      * Render HTML content to PDF, JPG or PNG
      * <p>The parameters this API accepts are:</p>
      * <ul>
-     * <li>"margin" - The document margin (in mm)</li>
      * <li>"css" - Inject custom CSS into the HTML</li>
-     * <li>"image-width" - If rendering to an image format (PNG or JPG) use this image width (in pixels)</li>
      * <li>"footer" - The footer HTML to insert into each page</li>
-     * <li>"format" - Which format to output</li>
-     * <li>"zoom" - Set the zoom factor when rendering the page (2.0 for double size</li>
      * <li>"title" - The document title</li>
      * <li>"content" - The HTML content</li>
      * <li>"page-width" - Set the PDF page width explicitly (in mm)</li>
      * <li>"timeout" - Timeout in seconds</li>
-     * <li>"margin-right" - The document right margin (in mm)</li>
      * <li>"grayscale" - Render the final document in grayscale</li>
      * <li>"margin-left" - The document left margin (in mm)</li>
      * <li>"page-size" - Set the document page size</li>
-     * <li>"delay" - Number of seconds to wait before rendering the page (can be useful for pages with animations etc)</li>
      * <li>"ignore-certificate-errors" - Ignore any TLS/SSL certificate errors</li>
      * <li>"page-height" - Set the PDF page height explicitly (in mm)</li>
+     * <li>"margin-top" - The document top margin (in mm)</li>
+     * <li>"bg-color" - For image rendering set the background color in hexadecimal notation (e.g. #0000ff)</li>
+     * <li>"margin" - The document margin (in mm)</li>
+     * <li>"image-width" - If rendering to an image format (PNG or JPG) use this image width (in pixels)</li>
+     * <li>"format" - Which format to output</li>
+     * <li>"zoom" - Set the zoom factor when rendering the page (2.0 for double size</li>
+     * <li>"margin-right" - The document right margin (in mm)</li>
+     * <li>"delay" - Number of seconds to wait before rendering the page (can be useful for pages with animations etc)</li>
      * <li>"image-height" - If rendering to an image format (PNG or JPG) use this image height (in pixels)</li>
      * <li>"header" - The header HTML to insert into each page</li>
-     * <li>"margin-top" - The document top margin (in mm)</li>
      * <li>"margin-bottom" - The document bottom margin (in mm)</li>
-     * <li>"bg-color" - For image rendering set the background color in hexadecimal notation (e.g. #0000ff)</li>
      * <li>"landscape" - Set the document to landscape orientation</li>
+     * <li>"exec" - Execute JavaScript on the website</li>
+     * <li>"user-agent" - Override the browsers default user-agent string with this one</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -426,7 +428,7 @@ public class NeutrinoAPIClient {
      * Get location information about an IP address and do reverse DNS (PTR) lookups
      * <p>The parameters this API accepts are:</p>
      * <ul>
-     * <li>"ip" - IPv4 or IPv6 address</li>
+     * <li>"ip" - An IPv4 or IPv6 address</li>
      * <li>"reverse-lookup" - Do a reverse DNS (PTR) lookup</li>
      * </ul>
      *
@@ -442,7 +444,7 @@ public class NeutrinoAPIClient {
      * Execute a realtime network probe against an IPv4 or IPv6 address
      * <p>The parameters this API accepts are:</p>
      * <ul>
-     * <li>"ip" - IPv4 or IPv6 address</li>
+     * <li>"ip" - An IPv4 or IPv6 address</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -514,6 +516,7 @@ public class NeutrinoAPIClient {
      * Generate a QR code as a PNG image
      * <p>The parameters this API accepts are:</p>
      * <ul>
+     * <li>"code-format" - The barcode format to output</li>
      * <li>"width" - The width of the QR code (in px)</li>
      * <li>"fg-color" - The QR code foreground color</li>
      * <li>"bg-color" - The QR code background color</li>

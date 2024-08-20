@@ -13,7 +13,7 @@ public class IPInfo {
         NeutrinoAPIClient neutrinoAPI = new NeutrinoAPIClient("<your-user-id>", "<your-api-key>");
         Map<String, String> params = new HashMap<>();
 
-        // IPv4 or IPv6 address
+        // An IPv4 or IPv6 address. Accepts standard IP notation and also CIDR notation
         params.put("ip", "1.1.1.1");
 
         // Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if
@@ -49,7 +49,7 @@ public class IPInfo {
             // The IPs full hostname (only set if reverse-lookup has been used)
             System.out.printf("hostname: %s%n", data.get("hostname"));
             
-            // An IPv4 or IPv6 address. Accepts standard IP notation and also CIDR notation.
+            // The IPv4 or IPv6 address returned
             System.out.printf("ip: %s%n", data.get("ip"));
             
             // True if this is a bogon IP address such as a private network, local network or reserved address
@@ -73,7 +73,7 @@ public class IPInfo {
             // ISO 3166-2 region code (if detectable)
             System.out.printf("region-code: %s%n", data.get("region-code"));
             
-            // Map containing timezone details
+            // Structure of a valid ip-info -> timezone response
             System.out.printf("timezone: %s%n", data.get("timezone"));
             
             // True if this is a valid IPv4 or IPv6 address
