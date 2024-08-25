@@ -36,10 +36,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class NeutrinoAPIClient {
 
-    public static final String Multicloud = "https://neutrinoapi.net/";
-    public static final String AWS = "https://aws.neutrinoapi.net/";
-    public static final String GCP = "https://gcp.neutrinoapi.net/";
-    public static final String Backup = "https://neutrinoapi.com/";
+    public static final String MULTICLOUD_ENDPOINT = "https://neutrinoapi.net/";
+    public static final String AWS_ENDPOINT = "https://aws.neutrinoapi.net/";
+    public static final String GCP_ENDPOINT = "https://gcp.neutrinoapi.net/";
+    public static final String BACKUP_ENDPOINT = "https://neutrinoapi.com/";
 
     private static final long CONNECT_TIMEOUT_MS = TimeUnit.SECONDS.toMillis(10);
 
@@ -56,7 +56,7 @@ public class NeutrinoAPIClient {
     public NeutrinoAPIClient(String userID, String APIKey) {
         this.userID = userID;
         this.apiKey = APIKey;
-        this.baseURL = Multicloud;
+        this.baseURL = MULTICLOUD_ENDPOINT;
     }
 
     /**

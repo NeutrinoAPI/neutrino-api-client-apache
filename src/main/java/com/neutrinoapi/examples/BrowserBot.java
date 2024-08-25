@@ -51,6 +51,9 @@ public class BrowserBot {
             // The complete raw, decompressed and decoded page content. Usually will be either HTML, JSON or XML
             System.out.printf("content: %s%n", data.get("content"));
             
+            // The size of the returned content in bytes
+            System.out.printf("content-size: %s%n", data.get("content-size"));
+            
             // Array containing all the elements matching the supplied selector
             System.out.printf("elements:%n");
             data.getAsJsonArray("elements").forEach(jsonElement -> {
@@ -72,7 +75,15 @@ public class BrowserBot {
             System.out.printf("error-message: %s%n", data.get("error-message"));
             
             // If you executed any JavaScript this array holds the results as objects
-            System.out.printf("exec-results: %s%n", data.get("exec-results"));
+            System.out.printf("exec-results:%n");
+            data.getAsJsonArray("exec-results").forEach(jsonElement -> {
+                JsonObject item = jsonElement.getAsJsonObject();
+                System.out.printf("%n");
+                // The result of the executed JavaScript statement. Will be empty if the statement returned nothing
+                System.out.printf("    result: %s%n", item.get("result"));
+                // The JavaScript statement that was executed
+                System.out.printf("    statement: %s%n", item.get("statement"));
+            });
             
             // The redirected URL if the URL responded with an HTTP redirect
             System.out.printf("http-redirect-url: %s%n", data.get("http-redirect-url"));
@@ -115,14 +126,24 @@ public class BrowserBot {
             // Map containing details of the TLS/SSL setup
             System.out.printf("security-details: %s%n", data.get("security-details"));
             
+            // The HTTP servers hostname (PTR/RDNS record)
+            System.out.printf("server-hostname: %s%n", data.get("server-hostname"));
+            
             // The HTTP servers IP address
             System.out.printf("server-ip: %s%n", data.get("server-ip"));
             
             // The document title
             System.out.printf("title: %s%n", data.get("title"));
             
-            // The page URL
+            // The requested URL. This may not be the same as the final destination URL, if the URL redirects
+            // then it will be set in 'http-redirect-url' and 'is-http-redirect' will also be true
             System.out.printf("url: %s%n", data.get("url"));
+            
+            // Structure of a browser-bot -> url-components response
+            System.out.printf("url-components: %s%n", data.get("url-components"));
+            
+            // True if the URL supplied is valid
+            System.out.printf("url-valid: %s%n", data.get("url-valid"));
             
         } else {
             // API request failed, you should handle this gracefully!
