@@ -75,6 +75,8 @@ public class GeocodeAddress {
                 System.out.printf("    country-code3: %s%n", item.get("country-code3"));
                 // ISO 4217 currency code associated with the country
                 System.out.printf("    currency-code: %s%n", item.get("currency-code"));
+                // The ISO 2-letter language code for the official language spoken in the country
+                System.out.printf("    language-code: %s%n", item.get("language-code"));
                 // The location latitude
                 System.out.printf("    latitude: %s%n", item.get("latitude"));
                 // Array of strings containing any location tags associated with the address. Tags are additional
@@ -102,7 +104,7 @@ public class GeocodeAddress {
                 System.out.printf("    region-code: %s%n", item.get("region-code"));
                 // The state of the location
                 System.out.printf("    state: %s%n", item.get("state"));
-                // Structure of a ip-info -> timezone response
+                // Structure of timezone
                 System.out.printf("    timezone: %s%n", item.get("timezone"));
             });
             

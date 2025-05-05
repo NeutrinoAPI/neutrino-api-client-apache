@@ -139,7 +139,7 @@ public class BrowserBot {
             // then it will be set in 'http-redirect-url' and 'is-http-redirect' will also be true
             System.out.printf("url: %s%n", data.get("url"));
             
-            // Structure of a browser-bot -> url-components response
+            // Structure of url-components
             System.out.printf("url-components: %s%n", data.get("url-components"));
             
             // True if the URL supplied is valid

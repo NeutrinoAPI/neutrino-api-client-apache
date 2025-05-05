@@ -29,6 +29,9 @@ public class APIErrorCode
     public static final int NO_BATCH_MODE = 22;
     public static final int BATCH_LIMIT_EXCEEDED = 23;
     public static final int BATCH_INVALID = 24;
+    public static final int DATASET_UNKNOWN = 26;
+    public static final int DATASET_GENERATION_FAILED = 27;
+    public static final int DATASET_INVALID_DATE = 28;
     public static final int USER_DEFINED_DAILY_LIMIT = 31;
     public static final int ACCESS_FORBIDDEN = 43;
     public static final int REQUEST_TOO_LARGE = 44;
@@ -75,6 +78,9 @@ public class APIErrorCode
             case NO_BATCH_MODE: return "BATCH PROCESSING NOT AVAILABLE ON YOUR PLAN";
             case BATCH_LIMIT_EXCEEDED: return "BATCH PROCESSING REQUEST LIMIT EXCEEDED";
             case BATCH_INVALID: return "INVALID BATCH REQUEST. DOES NOT CONFORM TO SPEC";
+            case DATASET_UNKNOWN: return "UNKNOWN DATASET ID OR INVALID DATASET OPTION SUPPLIED";
+            case DATASET_GENERATION_FAILED: return "FAILED TO GENERATE DATASET OUTPUT FILE";
+            case DATASET_INVALID_DATE: return "INVALID DATE SUPPLIED OR DATE IS BEFORE FIRST HISTORICAL RECORD";
             case USER_DEFINED_DAILY_LIMIT: return "DAILY API LIMIT EXCEEDED. SET BY ACCOUNT HOLDER";
             case ACCESS_FORBIDDEN: return "ACCESS DENIED. USER ID OR API KEY INVALID";
             case REQUEST_TOO_LARGE: return "REQUEST TOO LARGE. MAXIMUM SIZE IS 5MB FOR DATA AND 25MB FOR UPLOADS";

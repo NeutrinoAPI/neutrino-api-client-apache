@@ -14,7 +14,7 @@ public class BINListDownload {
 
         Path tmpFile;
         try {
-            tmpFile = Files.createTempFile("bin-list-download-", ".png");
+            tmpFile = Files.createTempFile("bin-list-download-", ".csv");
         } catch (IOException ex) {
             System.err.printf("Failed to create temp file: %s%n", ex);
             return;

@@ -60,6 +60,9 @@ public class GeocodeReverse {
             // True if these coordinates map to a real location
             System.out.printf("found: %s%n", data.get("found"));
             
+            // The ISO 2-letter language code for the official language spoken in the country
+            System.out.printf("language-code: %s%n", data.get("language-code"));
+            
             // The location latitude
             System.out.printf("latitude: %s%n", data.get("latitude"));
             
@@ -95,7 +98,7 @@ public class GeocodeReverse {
             // The state of the location
             System.out.printf("state: %s%n", data.get("state"));
             
-            // Structure of a ip-info -> timezone response
+            // Structure of timezone
             System.out.printf("timezone: %s%n", data.get("timezone"));
             
         } else {

@@ -61,6 +61,9 @@ public class IPInfo {
             // True if this is a IPv6 address. False if IPv4
             System.out.printf("is-v6: %s%n", data.get("is-v6"));
             
+            // The ISO 2-letter language code for the official language spoken in the country
+            System.out.printf("language-code: %s%n", data.get("language-code"));
+            
             // Location latitude
             System.out.printf("latitude: %s%n", data.get("latitude"));
             
@@ -73,7 +76,7 @@ public class IPInfo {
             // ISO 3166-2 region code (if detectable)
             System.out.printf("region-code: %s%n", data.get("region-code"));
             
-            // Structure of a ip-info -> timezone response
+            // Structure of timezone
             System.out.printf("timezone: %s%n", data.get("timezone"));
             
             // True if this is a valid IPv4 or IPv6 address

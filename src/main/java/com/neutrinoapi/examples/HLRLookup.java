@@ -92,6 +92,10 @@ public class HLRLookup {
             // The mobile MSIN number (Mobile Subscription Identification Number)
             System.out.printf("msin: %s%n", data.get("msin"));
             
+            // Contains any additional details about the current network such as former network names and mobile
+            // technology utilized
+            System.out.printf("network-tags: %s%n", data.get("network-tags"));
+            
             // The number type, possible values are:
             // • mobile
             // • fixed-line
