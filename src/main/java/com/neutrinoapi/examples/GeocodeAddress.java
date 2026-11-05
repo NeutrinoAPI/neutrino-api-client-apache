@@ -17,36 +17,49 @@ public class GeocodeAddress {
         // components are preferred.
         params.put("address", "1 Molesworth Street, Thorndon, Wellington 6011");
 
-        // The house/building number to locate
+        // The house/building number to locate (for structured address searches)
         params.put("house-number", "");
 
-        // The street/road name to locate
+        // The street/road name to locate (for structured address searches)
         params.put("street", "");
 
-        // The city/town name to locate
+        // The city/town name to locate (for structured address searches)
         params.put("city", "");
 
-        // The county/region name to locate
+        // The county/region name to locate (for structured address searches)
         params.put("county", "");
 
-        // The state name to locate
+        // The state name to locate (for structured address searches)
         params.put("state", "");
 
-        // The postal code to locate
+        // The postal code to locate (for structured address searches)
         params.put("postal-code", "");
 
-        // Limit result to this country (the default is no country bias)
+        // Prefer results from this country code (the default is no country bias)
         params.put("country-code", "");
 
+        // Prefer results from this list of country codes (space or comma separated values). Preference is
+        // in the order supplied, you can use the 'country-code' parameter to also set a dynamic or user
+        // supplied country code which takes precedence
+        params.put("country-codes", "");
+
         // The language to display results in, available languages are:
-        // • de, en, es, fr, it, pt, ru, zh
+        // • ar, de, en, es, fr, it, ja, nl, pt, ru, zh
         params.put("language-code", "en");
 
+        // Enable auto-complete for search-as-you-type and search suggestions. This option can find
+        // addresses based on partial search terms, combine with 'country-code' for country specific
+        // searches. Auto-complete works best with 'fuzzy-search' disabled for the fastest response times
+        // but can be combined if required
+        params.put("auto-complete", "false");
+
         // If no matches are found for the given address, start performing a recursive fuzzy search until a
-        // geolocation is found. This option is recommended for processing user input or implementing
-        // auto-complete. We use a combination of approximate string matching and data cleansing to find
-        // possible location matches
+        // geolocation is found. This option is useful for processing user supplied input that may be
+        // incomplete or have typos and where you do not mind some potential loss in precision
         params.put("fuzzy-search", "false");
+
+        // Limit search results to this many locations (between 1 and a maximum of 32)
+        params.put("limit", "8");
 
         APIResponse response = neutrinoAPI.geocodeAddress(params);
         if (response.getData().isPresent()) {
@@ -61,12 +74,35 @@ public class GeocodeAddress {
             data.getAsJsonArray("locations").forEach(jsonElement -> {
                 JsonObject item = jsonElement.getAsJsonObject();
                 System.out.printf("%n");
-                // The complete address using comma-separated values
+                // The full address string using comma-separated values, use 'postal-address' for the address string
+                // formatted using country/region specific rules
                 System.out.printf("    address: %s%n", item.get("address"));
-                // The components which make up the address such as road, city, state, etc
+                // The components which make up the address such as road, city, state, etc. These are country/region
+                // specific values, use 'address-structured' for a strict address structure which is the same for
+                // all locations globally
                 System.out.printf("    address-components: %s%n", item.get("address-components"));
+                // Structure of address-structured
+                System.out.printf("    address-structured: %s%n", item.get("address-structured"));
+                // The detected building type for the address, possible values are:
+                // • none - no building type was detected for this location
+                // • house - a residential house/property
+                // • apartment - a residential apartment complex
+                // • office - a commercial/business office
+                // • accommodation - a hotel/motel or other type of accommodation
+                // • education - a school or university
+                // • food - a restaurant or place where food can be purchased
+                // • shop - a shop selling any type of goods
+                // • attraction - an attraction such as theme parks or tourist activities
+                // • medical - a hospital or other medical facility
+                // • transport - a transportation building such as a bus or train depot
+                // • commercial - a commercial/industrial building
+                // • government - a government or military facility
+                // • public - a public building such as a townhall or community centre
+                System.out.printf("    building-type: %s%n", item.get("building-type"));
                 // The city of the location
                 System.out.printf("    city: %s%n", item.get("city"));
+                // ISO 2-letter continent code
+                System.out.printf("    continent-code: %s%n", item.get("continent-code"));
                 // The country of the location
                 System.out.printf("    country: %s%n", item.get("country"));
                 // The ISO 2-letter country code of the location
@@ -75,10 +111,16 @@ public class GeocodeAddress {
                 System.out.printf("    country-code3: %s%n", item.get("country-code3"));
                 // ISO 4217 currency code associated with the country
                 System.out.printf("    currency-code: %s%n", item.get("currency-code"));
+                // The location geohash
+                System.out.printf("    geohash: %s%n", item.get("geohash"));
                 // The ISO 2-letter language code for the official language spoken in the country
                 System.out.printf("    language-code: %s%n", item.get("language-code"));
                 // The location latitude
                 System.out.printf("    latitude: %s%n", item.get("latitude"));
+                // Map containing any external metadata linked to the location. Currently supports the following
+                // values which are only set if known: website-url, phone-number, org-name, wikipedia-title,
+                // wikidata-entity
+                System.out.printf("    location-profile: %s%n", item.get("location-profile"));
                 // Array of strings containing any location tags associated with the address. Tags are additional
                 // pieces of metadata about a specific location, there are thousands of different tags. Some
                 // examples of tags: shop, office, cafe, bank, pub

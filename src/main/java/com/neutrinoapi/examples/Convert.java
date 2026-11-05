@@ -24,8 +24,9 @@ public class Convert {
 
         // Convert using the rate on a historical date, accepted date formats are: YYYY-MM-DD, YYYY-MM,
         // YYYY. Historical rates are stored with daily granularity so the date format YYYY-MM-DD is
-        // preferred for the highest precision. If an invalid date or a date too far into the past is
-        // supplied then the API will respond with 'valid' as false and an empty 'historical-date'
+        // preferred for the highest precision. The earliest date currently possible is: 2000-01-01. If an
+        // invalid date or a date too far into the past is supplied then the API will respond with 'valid'
+        // as false and an empty 'historical-date'
         params.put("historical-date", "");
 
         APIResponse response = neutrinoAPI.convert(params);

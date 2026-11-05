@@ -56,7 +56,7 @@ public class URLInfo {
             // The HTTP status code this URL responded with. An HTTP status of 0 indicates a network level issue
             System.out.printf("http-status: %s%n", data.get("http-status"));
             
-            // The HTTP status message assoicated with the status code
+            // The HTTP status message associated with the status code
             System.out.printf("http-status-message: %s%n", data.get("http-status-message"));
             
             // True if an error occurred while loading the URL. This includes network errors, TLS errors and
@@ -74,7 +74,7 @@ public class URLInfo {
             // The time taken to load the URL content in seconds
             System.out.printf("load-time: %s%n", data.get("load-time"));
             
-            // A key-value map of the URL query paramaters
+            // A key-value map of the URL query parameters
             System.out.printf("query: %s%n", data.get("query"));
             
             // Is this URL actually serving real content

@@ -13,7 +13,8 @@ public class HLRLookup {
         NeutrinoAPIClient neutrinoAPI = new NeutrinoAPIClient("<your-user-id>", "<your-api-key>");
         Map<String, String> params = new HashMap<>();
 
-        // A phone number
+        // A phone number. This can be in international format (E.164) or local format. If passing local
+        // format you must also set either the 'country-code' option as well
         params.put("number", "+12106100045");
 
         // ISO 2-letter country code, assume numbers are based in this country. If not set numbers are

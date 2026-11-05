@@ -41,12 +41,19 @@ public class IPBlocklist {
             //   organization
             // • malware - IP is currently involved in distributing or is running malware
             // • spyware - IP is currently involved in distributing or is running spyware
-            // • spider - IP is running a hostile web spider / web crawler
+            // • spider - IP is running a hostile web spider (deprecated but kept for backwards compatibility
+            //   instead use UA/IP lookups for spider detection)
             // • dshield - IP has been flagged as a significant attack source by DShield (dshield.org)
             System.out.printf("blocklists: %s%n", data.get("blocklists"));
             
             // The CIDR address for this listing (only set if the IP is listed)
             System.out.printf("cidr: %s%n", data.get("cidr"));
+            
+            // The unix time when this IP was first seen on any blocklist
+            System.out.printf("first-seen: %s%n", data.get("first-seen"));
+            
+            // The ISO date when this IP was first seen on any blocklist
+            System.out.printf("first-seen-date: %s%n", data.get("first-seen-date"));
             
             // The IP address
             System.out.printf("ip: %s%n", data.get("ip"));
@@ -76,7 +83,8 @@ public class IPBlocklist {
             // IP address is hosting a spam bot, comment spamming or any other spamming type software
             System.out.printf("is-spam-bot: %s%n", data.get("is-spam-bot"));
             
-            // IP is running a hostile web spider / web crawler
+            // IP is running a hostile web spider (deprecated but kept for backwards compatibility instead use
+            // UA/IP lookups for spider detection)
             System.out.printf("is-spider: %s%n", data.get("is-spider"));
             
             // IP is involved in distributing or is running spyware
@@ -91,6 +99,9 @@ public class IPBlocklist {
             // The unix time when this IP was last seen on any blocklist. IPs are automatically removed after 7
             // days therefor this value will never be older than 7 days
             System.out.printf("last-seen: %s%n", data.get("last-seen"));
+            
+            // The ISO date when this IP was last seen on any blocklist
+            System.out.printf("last-seen-date: %s%n", data.get("last-seen-date"));
             
             // The number of blocklists the IP is listed on
             System.out.printf("list-count: %s%n", data.get("list-count"));
@@ -107,6 +118,10 @@ public class IPBlocklist {
                 // The sensor ID. This is a permanent and unique ID for each sensor
                 System.out.printf("    id: %s%n", item.get("id"));
             });
+            
+            // The total number of times this IP has been detected by any sensor, higher numbers indicate higher
+            // levels of malicious activity
+            System.out.printf("total-hits: %s%n", data.get("total-hits"));
             
         } else {
             // API request failed, you should handle this gracefully!

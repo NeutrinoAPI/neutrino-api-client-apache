@@ -13,7 +13,9 @@ public class DomainLookup {
         NeutrinoAPIClient neutrinoAPI = new NeutrinoAPIClient("<your-user-id>", "<your-api-key>");
         Map<String, String> params = new HashMap<>();
 
-        // A domain name, hostname, FQDN, URL, HTML link or email address to lookup
+        // A domain name, hostname, FQDN, URL, HTML link or email address to lookup. For internationalized
+        // domain names (IDNs) this field will accept either punycode or the raw unicode domain name, the
+        // API will always automatically return IDNs encoded into punycode
         params.put("host", "neutrinoapi.com");
 
         // For domains that we have never seen before then perform various live checks and realtime
@@ -47,9 +49,18 @@ public class DomainLookup {
             // The primary domain of the DNS provider for this domain
             System.out.printf("dns-provider: %s%n", data.get("dns-provider"));
             
-            // The primary domain name excluding any subdomains. This is also referred to as the second-level
-            // domain (SLD)
+            // The primary domain name excluding any subdomains. This is also commonly referred to as the
+            // second-level domain (SLD), the registrable domain, the root domain or the eTLD+1
             System.out.printf("domain: %s%n", data.get("domain"));
+            
+            // The effective top-level domain (eTLD). Usually the same as the TLD but will differ when a domain
+            // is on the public suffix list (PSL) and acts as a TLD for registrable domains (for example
+            // github.io is an eTLD)
+            System.out.printf("etld: %s%n", data.get("etld"));
+            
+            // The ISO date this domain is due to expire. An empty value indicates we could not reliably
+            // determine the date
+            System.out.printf("expiry-date: %s%n", data.get("expiry-date"));
             
             // The fully qualified domain name (FQDN)
             System.out.printf("fqdn: %s%n", data.get("fqdn"));
@@ -78,6 +89,18 @@ public class DomainLookup {
             // no valid MX records
             System.out.printf("mail-provider: %s%n", data.get("mail-provider"));
             
+            // The status of the domains mail configuration, possible values are:
+            // • ok - the domain is in working order and can receive email
+            // • invalid - the domain is not a conformant hostname. May contain invalid syntax or characters
+            // • no-service - the domain owner has indicated there is no mail service on the domain (also
+            //   known as the 'Null MX')
+            // • no-mail - the domain has no valid MX records so cannot receive email
+            // • mx-invalid - MX records contain invalid or non-conformant hostname values
+            // • mx-bogon - MX records point to bogon IP addresses
+            // • resolv-error - MX records do not resolve to any valid IP addresses
+            // • unknown - mail status is currently unknown (the domain may still be pending processing)
+            System.out.printf("mail-status: %s%n", data.get("mail-status"));
+            
             // The domains estimated global traffic rank with the highest rank being 1. A value of 0 indicates
             // the domain is currently ranked outside of the top 1M of domains
             System.out.printf("rank: %s%n", data.get("rank"));
@@ -86,11 +109,20 @@ public class DomainLookup {
             // we could not reliably determine the date
             System.out.printf("registered-date: %s%n", data.get("registered-date"));
             
-            // The IANA registrar ID (0 if no registrar ID was found)
+            // True if the registrar is an officially IANA accredited registrar
+            System.out.printf("registrar-accredited: %s%n", data.get("registrar-accredited"));
+            
+            // The ISO 2-letter country code where the registrar is located
+            System.out.printf("registrar-country-code: %s%n", data.get("registrar-country-code"));
+            
+            // The IANA registrar ID (0 if no official IANA registrar ID exists)
             System.out.printf("registrar-id: %s%n", data.get("registrar-id"));
             
             // The name of the domain registrar owning this domain
             System.out.printf("registrar-name: %s%n", data.get("registrar-name"));
+            
+            // The main website URL for the registrar
+            System.out.printf("registrar-website: %s%n", data.get("registrar-website"));
             
             // An array of objects containing details on which specific blocklist sensors have detected this
             // domain
@@ -110,12 +142,25 @@ public class DomainLookup {
             System.out.printf("tld: %s%n", data.get("tld"));
             
             // For a country code top-level domain (ccTLD) this will contain the associated ISO 2-letter country
-            // code
+            // code. For non-ccTLD domains this field will always be empty
             System.out.printf("tld-cc: %s%n", data.get("tld-cc"));
             
             // True if a valid domain was found. For a domain to be considered valid it must be registered and
             // have valid DNS NS records
             System.out.printf("valid: %s%n", data.get("valid"));
+            
+            // The primary domain of the website hosting provider for this domain. An empty value indicates the
+            // domain has no active website provider
+            System.out.printf("website-provider: %s%n", data.get("website-provider"));
+            
+            // The status of the domains website configuration, possible values are:
+            // • ok - the domain has a valid and working website
+            // • no-http - the domain has website records but the HTTP servers are unresponsive or dead
+            // • no-ip - the domain has no valid A or AAAA website records
+            // • bogon-ip - the domains website records point to bogon or invalid IP addresses
+            // • parked - the domain has a working website but indicates it is currently parked or for sale
+            // • unknown - website status is currently unknown (the domain may still be pending processing)
+            System.out.printf("website-status: %s%n", data.get("website-status"));
             
         } else {
             // API request failed, you should handle this gracefully!

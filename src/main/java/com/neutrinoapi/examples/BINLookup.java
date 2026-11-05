@@ -81,6 +81,10 @@ public class BINLookup {
             // Is this a prepaid or prepaid reloadable card
             System.out.printf("is-prepaid: %s%n", data.get("is-prepaid"));
             
+            // Indicates the card can be reloaded with funds. This is mostly useful to distinguish between
+            // non-reloadable and reloadable prepaid card types
+            System.out.printf("is-reloadable: %s%n", data.get("is-reloadable"));
+            
             // The card issuer
             System.out.printf("issuer: %s%n", data.get("issuer"));
             

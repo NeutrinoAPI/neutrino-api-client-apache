@@ -16,13 +16,19 @@ public class PhoneVerify {
         // The phone number to send the verification code to
         params.put("number", "+12106100045");
 
-        // ISO 2-letter country code, assume numbers are based in this country. If not set numbers are
-        // assumed to be in international format (with or without the leading + sign)
-        params.put("country-code", "");
+        // The number of digits to use in the security code (between 4 and 12)
+        params.put("code-length", "6");
 
         // Pass in your own security code. This is useful if you have implemented TOTP or similar 2FA
         // methods. If not set then we will generate a secure random code
         params.put("security-code", "");
+
+        // The delay in milliseconds between the playback of each security code
+        params.put("playback-delay", "800");
+
+        // ISO 2-letter country code, assume numbers are based in this country. If not set numbers are
+        // assumed to be in international format (with or without the leading + sign)
+        params.put("country-code", "");
 
         // The language to playback the verification code in, available languages are:
         // • de - German
@@ -34,15 +40,9 @@ public class PhoneVerify {
         // • ru - Russian
         params.put("language-code", "en");
 
-        // The number of digits to use in the security code (between 4 and 12)
-        params.put("code-length", "6");
-
         // Limit the total number of calls allowed to the supplied phone number, if the limit is reached
         // within the TTL then error code 14 will be returned
         params.put("limit", "3");
-
-        // The delay in milliseconds between the playback of each security code
-        params.put("playback-delay", "800");
 
         // Set the TTL in number of days that the 'limit' option will remember a phone number (the default
         // is 1 day and the maximum is 365 days)

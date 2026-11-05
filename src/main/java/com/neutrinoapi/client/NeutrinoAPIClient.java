@@ -128,7 +128,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * Browser bot can extract content, interact with keyboard and mouse events, and execute JavaScript on a website
+     * Automate a real web browser to extract content, interact with, or execute JavaScript on any website
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"delay" - Delay in seconds to wait before capturing any page data</li>
@@ -149,7 +149,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * A currency and unit conversion tool
+     * Convert currency and other numerical units between each other
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"from-value" - The value to convert from (e.g. 10.95)</li>
@@ -199,7 +199,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * SMTP based email address verification
+     * Perform in-depth SMTP based email address verification
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"email" - An email address</li>
@@ -215,19 +215,22 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * Geocode an address, partial address or just the name of a place
+     * Geocode an address, partial address or the name of a place
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"address" - The full address</li>
-     * <li>"house-number" - The house/building number to locate</li>
-     * <li>"street" - The street/road name to locate</li>
-     * <li>"city" - The city/town name to locate</li>
-     * <li>"county" - The county/region name to locate</li>
-     * <li>"state" - The state name to locate</li>
-     * <li>"postal-code" - The postal code to locate</li>
-     * <li>"country-code" - Limit result to this country (the default is no country bias)</li>
+     * <li>"house-number" - The house/building number to locate (for structured address searches)</li>
+     * <li>"street" - The street/road name to locate (for structured address searches)</li>
+     * <li>"city" - The city/town name to locate (for structured address searches)</li>
+     * <li>"county" - The county/region name to locate (for structured address searches)</li>
+     * <li>"state" - The state name to locate (for structured address searches)</li>
+     * <li>"postal-code" - The postal code to locate (for structured address searches)</li>
+     * <li>"country-code" - Prefer results from this country code (the default is no country bias)</li>
+     * <li>"country-codes" - Prefer results from this list of country codes (space or comma separated values)</li>
      * <li>"language-code" - The language to display results in</li>
+     * <li>"auto-complete" - Enable auto-complete for search-as-you-type and search suggestions</li>
      * <li>"fuzzy-search" - If no matches are found for the given address</li>
+     * <li>"limit" - Limit search results to this many locations (between 1 and a maximum of 32)</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -246,6 +249,7 @@ public class NeutrinoAPIClient {
      * <li>"longitude" - The location longitude in decimal degrees format</li>
      * <li>"language-code" - The language to display results in</li>
      * <li>"zoom" - The zoom level to respond with: address - the most precise address available street - the street level city - the city level state - the state level country - the country level </li>
+     * <li>"geohash" - Reverse lookup by a geohash instead of using latitude and longitude</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -257,7 +261,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * Connect to the global mobile cellular network and retrieve the status of a mobile device
+     * Connect to the global mobile cellular network and retrieve the status of a mobile phone number
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"number" - A phone number</li>
@@ -273,7 +277,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * Check the reputation of an IP address, domain name or URL against a comprehensive list of blacklists and blocklists
+     * Check the reputation of an IP address, domain name or URL against a comprehensive list of blocklists
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"host" - An IP address</li>
@@ -392,7 +396,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * The IP Blocklist API will detect potentially malicious or dangerous IP addresses
+     * Detect potentially malicious or dangerous IP addresses
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"ip" - An IPv4 or IPv6 address</li>
@@ -408,7 +412,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * This API is a direct feed to our IP blocklist data
+     * Download a direct feed to our IP blocklist data
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"format" - The data format</li>
@@ -445,7 +449,7 @@ public class NeutrinoAPIClient {
     }
 
     /**
-     * Execute a realtime network probe against an IPv4 or IPv6 address
+     * Execute a realtime network probe against an IP address
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"ip" - An IPv4 or IPv6 address</li>
@@ -464,8 +468,8 @@ public class NeutrinoAPIClient {
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"number" - The phone number to call</li>
-     * <li>"limit" - Limit the total number of calls allowed to the supplied phone number</li>
      * <li>"audio-url" - A URL to a valid audio file</li>
+     * <li>"limit" - Limit the total number of calls allowed to the supplied phone number</li>
      * <li>"limit-ttl" - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)</li>
      * </ul>
      *
@@ -474,7 +478,7 @@ public class NeutrinoAPIClient {
      * @see <a href="https://www.neutrinoapi.com/api/phone-playback">Documentation</a>
      */
     public APIResponse phonePlayback(Map<String, String> params) {
-        return execRequest("POST", "phone-playback", params, null, 30L);
+        return execRequest("GET", "phone-playback", params, null, 30L);
     }
 
     /**
@@ -499,12 +503,12 @@ public class NeutrinoAPIClient {
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"number" - The phone number to send the verification code to</li>
-     * <li>"country-code" - ISO 2-letter country code</li>
-     * <li>"security-code" - Pass in your own security code</li>
-     * <li>"language-code" - The language to playback the verification code in</li>
      * <li>"code-length" - The number of digits to use in the security code (between 4 and 12)</li>
-     * <li>"limit" - Limit the total number of calls allowed to the supplied phone number</li>
+     * <li>"security-code" - Pass in your own security code</li>
      * <li>"playback-delay" - The delay in milliseconds between the playback of each security code</li>
+     * <li>"country-code" - ISO 2-letter country code</li>
+     * <li>"language-code" - The language to playback the verification code in</li>
+     * <li>"limit" - Limit the total number of calls allowed to the supplied phone number</li>
      * <li>"limit-ttl" - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)</li>
      * </ul>
      *
@@ -513,11 +517,11 @@ public class NeutrinoAPIClient {
      * @see <a href="https://www.neutrinoapi.com/api/phone-verify">Documentation</a>
      */
     public APIResponse phoneVerify(Map<String, String> params) {
-        return execRequest("POST", "phone-verify", params, null, 30L);
+        return execRequest("GET", "phone-verify", params, null, 30L);
     }
 
     /**
-     * Generate a QR code as a PNG image
+     * Generate a QR or C128 code as a PNG image
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"code-format" - The barcode format to output</li>
@@ -542,13 +546,13 @@ public class NeutrinoAPIClient {
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"number" - The phone number to send a verification code to</li>
-     * <li>"country-code" - ISO 2-letter country code</li>
-     * <li>"security-code" - Pass in your own security code</li>
-     * <li>"language-code" - The language to send the verification code in</li>
      * <li>"code-length" - The number of digits to use in the security code (must be between 4 and 12)</li>
+     * <li>"security-code" - Pass in your own security code</li>
+     * <li>"country-code" - ISO 2-letter country code</li>
+     * <li>"language-code" - The language to send the verification code in</li>
      * <li>"limit" - Limit the total number of SMS allowed to the supplied phone number</li>
-     * <li>"brand-name" - Set a custom brand or product name in the verification message</li>
      * <li>"limit-ttl" - Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)</li>
+     * <li>"brand-name" - Set a custom brand or product name in the verification message</li>
      * </ul>
      *
      * @param params The API request parameters
@@ -556,7 +560,7 @@ public class NeutrinoAPIClient {
      * @see <a href="https://www.neutrinoapi.com/api/sms-verify">Documentation</a>
      */
     public APIResponse smsVerify(Map<String, String> params) {
-        return execRequest("POST", "sms-verify", params, null, 30L);
+        return execRequest("GET", "sms-verify", params, null, 30L);
     }
 
     /**
@@ -564,12 +568,15 @@ public class NeutrinoAPIClient {
      * <p>The parameters this API accepts are:</p>
      * <ul>
      * <li>"ua" - The user-agent string to lookup</li>
-     * <li>"ua-version" - For client hints this corresponds to the 'UA-Full-Version' header or 'uaFullVersion' from NavigatorUAData</li>
-     * <li>"ua-platform" - For client hints this corresponds to the 'UA-Platform' header or 'platform' from NavigatorUAData</li>
-     * <li>"ua-platform-version" - For client hints this corresponds to the 'UA-Platform-Version' header or 'platformVersion' from NavigatorUAData</li>
-     * <li>"ua-mobile" - For client hints this corresponds to the 'UA-Mobile' header or 'mobile' from NavigatorUAData</li>
-     * <li>"device-model" - For client hints this corresponds to the 'UA-Model' header or 'model' from NavigatorUAData</li>
-     * <li>"device-brand" - This parameter is only used in combination with 'device-model' when doing direct device lookups without any user-agent data</li>
+     * <li>"ua-version" - For client hints this corresponds to the 'sec-ch-ua-full-version' header</li>
+     * <li>"ua-platform" - For client hints this corresponds to the 'sec-ch-ua-platform' header</li>
+     * <li>"ua-platform-version" - For client hints this corresponds to the 'sec-ch-ua-platform-version' header</li>
+     * <li>"ua-mobile" - For client hints this corresponds to the 'sec-ch-ua-mobile' header</li>
+     * <li>"device-model" - For client hints this corresponds to the 'sec-ch-ua-model' header</li>
+     * <li>"device-brand" - This parameter is only used in combination with 'device-model' for direct device lookups without any user-agent data</li>
+     * <li>"ua-arch" - For client hints this corresponds to the 'sec-ch-ua-arch' header</li>
+     * <li>"ua-bitness" - For client hints this corresponds to the 'sec-ch-ua-bitness' header</li>
+     * <li>"ua-form-factors" - For client hints this corresponds to the 'sec-ch-ua-form-factors' header</li>
      * </ul>
      *
      * @param params The API request parameters

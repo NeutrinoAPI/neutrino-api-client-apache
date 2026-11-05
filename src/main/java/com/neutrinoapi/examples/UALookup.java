@@ -13,49 +13,75 @@ public class UALookup {
         NeutrinoAPIClient neutrinoAPI = new NeutrinoAPIClient("<your-user-id>", "<your-api-key>");
         Map<String, String> params = new HashMap<>();
 
-        // The user-agent string to lookup. For client hints use the 'UA' header or the JSON data directly
-        // from 'navigator.userAgentData.brands' or 'navigator.userAgentData.getHighEntropyValues()'
+        // The user-agent string to lookup. For client hints this corresponds to the 'sec-ch-ua' header or
+        // you can also pass the JSON data directly from the
+        // 'navigator.userAgentData.getHighEntropyValues()' JavaScript API
         params.put("ua", "Mozilla/5.0 (Linux; Android 11; SM-G9980U1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.101 Mobile Safari/537.36");
 
-        // For client hints this corresponds to the 'UA-Full-Version' header or 'uaFullVersion' from
-        // NavigatorUAData
+        // For client hints this corresponds to the 'sec-ch-ua-full-version' header
         params.put("ua-version", "");
 
-        // For client hints this corresponds to the 'UA-Platform' header or 'platform' from NavigatorUAData
+        // For client hints this corresponds to the 'sec-ch-ua-platform' header
         params.put("ua-platform", "");
 
-        // For client hints this corresponds to the 'UA-Platform-Version' header or 'platformVersion' from
-        // NavigatorUAData
+        // For client hints this corresponds to the 'sec-ch-ua-platform-version' header
         params.put("ua-platform-version", "");
 
-        // For client hints this corresponds to the 'UA-Mobile' header or 'mobile' from NavigatorUAData
+        // For client hints this corresponds to the 'sec-ch-ua-mobile' header
         params.put("ua-mobile", "");
 
-        // For client hints this corresponds to the 'UA-Model' header or 'model' from NavigatorUAData. You
-        // can also use this parameter to lookup a device directly by its model name, model code or hardware
-        // code, on android you can get the model name from:
+        // For client hints this corresponds to the 'sec-ch-ua-model' header. You can also use this
+        // parameter to lookup a device directly by its model name, model code or hardware code, on android
+        // you can get the model name from:
         // https://developer.android.com/reference/android/os/Build.html#MODEL
         params.put("device-model", "");
 
-        // This parameter is only used in combination with 'device-model' when doing direct device lookups
-        // without any user-agent data. Set this to the brand or manufacturer name, this is required for
-        // accurate device detection with ambiguous model names. On android you can get the device brand
-        // from: https://developer.android.com/reference/android/os/Build#MANUFACTURER
+        // This parameter is only used in combination with 'device-model' for direct device lookups without
+        // any user-agent data. Set this to the brand or manufacturer name, this is required for accurate
+        // device detection with ambiguous model names. On android you can get the device brand from:
+        // https://developer.android.com/reference/android/os/Build#MANUFACTURER
         params.put("device-brand", "");
+
+        // For client hints this corresponds to the 'sec-ch-ua-arch' header
+        params.put("ua-arch", "");
+
+        // For client hints this corresponds to the 'sec-ch-ua-bitness' header
+        params.put("ua-bitness", "");
+
+        // For client hints this corresponds to the 'sec-ch-ua-form-factors' header
+        params.put("ua-form-factors", "");
 
         APIResponse response = neutrinoAPI.uaLookup(params);
         if (response.getData().isPresent()) {
             JsonObject data = response.getData().get();
             System.out.println("API Response OK: ");
             
-            // If the client is a web browser which underlying browser engine does it use
+            // For web browsers which underlying browser engine does it use
             System.out.printf("browser-engine: %s%n", data.get("browser-engine"));
             
-            // If the client is a web browser which year was this browser version released
+            // The web browser name. For Apps/WebViews this will be the name of the underlying browser used,
+            // otherwise this is identical to the 'name' field
+            System.out.printf("browser-name: %s%n", data.get("browser-name"));
+            
+            // For web browsers which year was this browser version released
             System.out.printf("browser-release: %s%n", data.get("browser-release"));
+            
+            // For web browsers the ISO date this browser version was released
+            System.out.printf("browser-release-date: %s%n", data.get("browser-release-date"));
+            
+            // The browsers full version. For Apps/WebViews this will be the full version of the underlying app
+            // browser, otherwise this is identical to the 'version' field
+            System.out.printf("browser-version: %s%n", data.get("browser-version"));
+            
+            // The browsers major version. For Apps/WebViews this will be the major version of the underlying
+            // app browser, otherwise this is identical to the 'version-major' field
+            System.out.printf("browser-version-major: %s%n", data.get("browser-version-major"));
             
             // The device brand / manufacturer
             System.out.printf("device-brand: %s%n", data.get("device-brand"));
+            
+            // The device display height in millimeters
+            System.out.printf("device-height-mm: %s%n", data.get("device-height-mm"));
             
             // The device display height in CSS 'px'
             System.out.printf("device-height-px: %s%n", data.get("device-height-px"));
@@ -82,16 +108,32 @@ public class UALookup {
             // The device display resolution in physical pixels (e.g. 720x1280)
             System.out.printf("device-resolution: %s%n", data.get("device-resolution"));
             
+            // The device display width in millimeters
+            System.out.printf("device-width-mm: %s%n", data.get("device-width-mm"));
+            
             // The device display width in CSS 'px'
             System.out.printf("device-width-px: %s%n", data.get("device-width-px"));
+            
+            // True if this user agent is from a mobile or desktop app. You can distinguish the app name and
+            // version from the 'name' and 'version-*' fields and the underlying browser/WebView from the
+            // 'browser-*' fields
+            System.out.printf("is-app: %s%n", data.get("is-app"));
+            
+            // For web browsers is the version up-to-date with the current stable release (+/- one version)
+            System.out.printf("is-current: %s%n", data.get("is-current"));
             
             // Is this a mobile device (e.g. a phone or tablet)
             System.out.printf("is-mobile: %s%n", data.get("is-mobile"));
             
-            // Is this a WebView / embedded software client
+            // For chrome/chromium based browsers is this user agent string frozen and requires client hints for
+            // more accurate details. For more information see user-agent reduction and to test a browser for
+            // client hints go to the client hints analyzer test page
+            System.out.printf("is-ua-frozen: %s%n", data.get("is-ua-frozen"));
+            
+            // Is this a WebView or embedded web browser. This includes mobile and desktop apps using WebViews
             System.out.printf("is-webview: %s%n", data.get("is-webview"));
             
-            // The client software name
+            // The client software name / user agent name / web browser name
             System.out.printf("name: %s%n", data.get("name"));
             
             // The full operating system name
@@ -122,10 +164,10 @@ public class UALookup {
             // The user agent string
             System.out.printf("ua: %s%n", data.get("ua"));
             
-            // The client software full version
+            // The user agent software full version
             System.out.printf("version: %s%n", data.get("version"));
             
-            // The client software major version
+            // The user agent software major version
             System.out.printf("version-major: %s%n", data.get("version-major"));
             
         } else {

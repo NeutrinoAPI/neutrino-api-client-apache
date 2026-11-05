@@ -20,7 +20,7 @@ public class GeocodeReverse {
         params.put("longitude", "174.7775229");
 
         // The language to display results in, available languages are:
-        // • de, en, es, fr, it, pt, ru
+        // • ar, de, en, es, fr, it, ja, nl, pt, ru, zh
         params.put("language-code", "en");
 
         // The zoom level to respond with:
@@ -31,19 +31,48 @@ public class GeocodeReverse {
         // • country - the country level
         params.put("zoom", "address");
 
+        // Reverse lookup by a geohash instead of using latitude and longitude
+        params.put("geohash", "");
+
         APIResponse response = neutrinoAPI.geocodeReverse(params);
         if (response.getData().isPresent()) {
             JsonObject data = response.getData().get();
             System.out.println("API Response OK: ");
             
-            // The complete address using comma-separated values
+            // The full address string using comma-separated values, use 'postal-address' for the address string
+            // formatted using country/region specific rules
             System.out.printf("address: %s%n", data.get("address"));
             
-            // The components which make up the address such as road, city, state, etc
+            // The components which make up the address such as road, city, state, etc. These are country/region
+            // specific values, use 'address-structured' for a strict address structure which is the same for
+            // all locations globally
             System.out.printf("address-components: %s%n", data.get("address-components"));
+            
+            // Structure of address-structured
+            System.out.printf("address-structured: %s%n", data.get("address-structured"));
+            
+            // The detected building type for the address, possible values are:
+            // • none - no building type was detected for this location
+            // • house - a residential house/property
+            // • apartment - a residential apartment complex
+            // • office - a commercial/business office
+            // • accommodation - a hotel/motel or other type of accommodation
+            // • education - a school or university
+            // • food - a restaurant or place where food can be purchased
+            // • shop - a shop selling any type of goods
+            // • attraction - an attraction such as theme parks or tourist activities
+            // • medical - a hospital or other medical facility
+            // • transport - a transportation building such as a bus or train depot
+            // • commercial - a commercial/industrial building
+            // • government - a government or military facility
+            // • public - a public building such as a townhall or community centre
+            System.out.printf("building-type: %s%n", data.get("building-type"));
             
             // The city of the location
             System.out.printf("city: %s%n", data.get("city"));
+            
+            // ISO 2-letter continent code
+            System.out.printf("continent-code: %s%n", data.get("continent-code"));
             
             // The country of the location
             System.out.printf("country: %s%n", data.get("country"));
@@ -60,11 +89,19 @@ public class GeocodeReverse {
             // True if these coordinates map to a real location
             System.out.printf("found: %s%n", data.get("found"));
             
+            // The location geohash
+            System.out.printf("geohash: %s%n", data.get("geohash"));
+            
             // The ISO 2-letter language code for the official language spoken in the country
             System.out.printf("language-code: %s%n", data.get("language-code"));
             
             // The location latitude
             System.out.printf("latitude: %s%n", data.get("latitude"));
+            
+            // Map containing any external metadata linked to the location. Currently supports the following
+            // values which are only set if known: website-url, phone-number, org-name, wikipedia-title,
+            // wikidata-entity
+            System.out.printf("location-profile: %s%n", data.get("location-profile"));
             
             // Array of strings containing any location tags associated with the address. Tags are additional
             // pieces of metadata about a specific location, there are thousands of different tags. Some
